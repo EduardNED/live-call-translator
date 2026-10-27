@@ -88,6 +88,13 @@ Google pricing). A local safety stop ends the call before the configured allocat
 - The model is a preview; recognition can mishear numbers, dates and names. Confirm key figures
   out loud, and keep sentences short when speaking through a machine translator.
 - Translated speech uses a synthetic voice; overlapping speakers are translated as one stream.
+- **Other call apps (Zoom, Microsoft Teams, etc.).** The audio routing itself is app-agnostic:
+  any app where you can choose the microphone and the speaker can use the two virtual devices.
+  The continuous `call` mode, however, is tied to a Google Meet tab in Chrome: it refuses to
+  start without one and stops when you leave that meeting. Using it with another app needs a
+  Meet-independent start/stop (for example, stop by Ctrl-C only); this is neither built nor
+  tested. In Microsoft Teams, choosing the "Microsoft Teams Audio" device as the microphone has
+  not been verified and may require another virtual device.
 
 ## Engineering notes
 
