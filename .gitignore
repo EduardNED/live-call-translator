@@ -1,0 +1,14 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.local/
+config.local.toml
+/LANE.md
+*.egg-info/
+build/
+dist/

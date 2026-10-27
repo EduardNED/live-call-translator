@@ -1,0 +1,54 @@
+# Copy to ignored config.local.toml. Never commit real device/project values.
+project = "REPLACE_WITH_EXISTING_PROJECT"
+location = "global"
+model = "gemini-3.5-live-translate-preview"
+source_language = "en"
+target_language = "fr"
+# Device names must match `call-translator devices` exactly, e.g. a curly apostrophe.
+input_device = "REPLACE_WITH_PHYSICAL_MICROPHONE"
+output_device = "REPLACE_WITH_HEADPHONES"  # physical headphones only; loudspeakers and virtual/aggregate devices are rejected
+audio_latency = "high"  # keep high for the one-call setup
+max_seconds = 60   # short diagnostic window only (1-120 s); normal call ignores this; historical [call] diagnostics below
+
+# Default: confirm credit on the test day. For this personal tool, explicit standing
+# owner confirmation may replace repeated cloud checks until the recorded expiry.
+# These fields are an operator attestation, not a billing cap or API verification.
+[credit]
+verified_on = "REPLACE_WITH_TODAY_YYYY_MM_DD"
+expires_on = "REPLACE_WITH_CREDIT_EXPIRY"
+remaining_usd = 0.0
+eligible = false
+# owner_confirmed = true  # only on explicit owner instruction; keep verified_on unchanged
+
+# Finite call window, used instead of max_seconds when the table is present. Each direction's
+# API lifetime is setup + conversation + drain; it must fit what is left of the owner-approved
+# packet (recompute packet_remaining_seconds from the logs on the day; it is an operator
+# attestation like [credit], not a provider limit). Normal end: speech stops being admitted,
+# then up to drain_seconds for accepted audio to play out. Ctrl-C and faults never drain.
+# Remove the table (or comment it out) for short diagnostics once its date goes stale.
+# [call]
+# setup_seconds = 15
+# conversation_seconds = 300
+# drain_seconds = 20
+# packet_remaining_seconds = 600
+# packet_verified_on = "REPLACE_WITH_TODAY_YYYY_MM_DD"
+
+# Used by check-bridge / bridge and check-call / call. Two distinct loopbacks are required.
+# Meet microphone = outgoing_device ("Microsoft Teams Audio"); Meet speaker = incoming_device ("BlackHole 2ch").
+# Swapped roles (incoming = "Microsoft Teams Audio") are rejected by check_bridge / check-call.
+[bridge]
+outgoing_device = "Microsoft Teams Audio"
+incoming_device = "BlackHole 2ch"
+
+# Normal continuous CLI only: uncomment for a separately owner-started call, remove [call].
+# Valid credit attestation and explicit owner allocation required; examples are not spending authority.
+# 90 min + setup/renewal/recovery + 20% reserve needs about $8.40; $9 covers the plan.
+# [continuous]
+# planned_minutes = 90   # capacity plan, never a countdown shutdown
+# allocation_usd = 0.0  # set only to the fresh owner-approved covered amount
+# reserve_percent = 20
+# auth_source = "gcloud" # existing identity explicitly; "adc" is the other existing option
+
+# Optional private text is CLI-only: add --save-transcript to call explicitly.
+# Default: no saved text. No audio recording. Files: main checkout .local/transcripts/.
+# Disk failures warn and keep voice live. See README for privacy, partial text and pricing.
