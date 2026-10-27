@@ -1,6 +1,6 @@
 # Live Call Translator
 
-Real-time, two-way voice translation for Google Meet on macOS, built on Google's
+Real-time, two-way voice translation for Google Meet (Zoom, Microsoft Teams, etc.) on macOS, built on Google's
 `gemini-3.5-live-translate-preview` model.
 
 You speak your language into your microphone; the other participants hear the translation as
