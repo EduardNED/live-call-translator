@@ -8,7 +8,7 @@ your Meet microphone. They speak theirs; you hear the translation in your headph
 has to be installed on the other participants' side.
 
 It was built by a solo founder to hold real partner meetings across a language barrier, and was
-used for a 52-minute Google Meet (Russian ↔ French) with two remote participants on separate
+used for a 52-minute Google Meet with two remote participants on separate
 devices: 12 session renewals, no dropouts, no restarts.
 
 ## How it works
